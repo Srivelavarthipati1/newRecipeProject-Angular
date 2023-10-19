@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataService } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -12,6 +13,7 @@ export class RecipeDetailsComponent implements OnInit{
 recipe: Recipe;
 id: number;
 constructor(private recipeService: RecipeService,
+  private dataService:DataService,
   private route:ActivatedRoute, 
   private router: Router){}
 
@@ -34,7 +36,10 @@ onEditRecipe(){
 }
 onDeleteRecipe(){
   this.recipeService.deleteRecipe(this.id);
-  this.router.navigate(['/recipes']);
-}
+  // this.dataS.onDeleteRecipe(this.id)
 
+  
+    // Call the updateOrCreateRecipe method in your DataService to update the backend
+    this.dataService.updateOrCreateRecipe()
+  }
 }

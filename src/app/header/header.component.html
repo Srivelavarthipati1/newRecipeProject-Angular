@@ -4,18 +4,39 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item" routerLinkActive="active"><a class="nav-link active" routerLink="/recipes" aria-current="page">Recipes</a></li>
-                <li class="nav-item" routerLinkActive="active"><a class="nav-link active" routerLink="/shopping-list"aria-current="page">Shopping List</a></li>
+                <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated">
+                    <a class="nav-link active" routerLink="/recipes"
+                        aria-current="page" >
+                        Recipes
+                    </a>
+                    </li>
+                <li class="nav-item" routerLinkActive="active"><a class="nav-link active" routerLink="/auth"
+                        aria-current="page" *ngIf="!isAuthenticated">
+                        Authenticate
+                    </a>
+                    </li>
+                <li class="nav-item" routerLinkActive="active"><a class="nav-link active" routerLink="/shopping-list"
+                        aria-current="page">Shopping List</a></li>
 
-                <li class="nav-item dropdown " appDropdown>
-                    <a style="cursor:pointer" class="nav-link dropdown-toggle float-end"  role="button" data-bs-toggle="dropdown" 
-                        aria-expanded="false" appDropdown>
-                       Manage </a>
-                    <ul class="dropdown-menu" appDropdown>
-                        <li><a  style="cursor:pointer" class="dropdown-item" (click)="onSaveData()">Save data</a></li>
-                        <li><a style="cursor:pointer" type="button" class="dropdown-item" (click)="onFetchData()"  >Fetch Data</a></li>
-                    </ul>
-               
+                <ul class="navbar-nav ms-auto"> <!-- Use ms-auto class to align items to the right -->
+                    <li class="nav-item" *ngIf="isAuthenticated">
+                        <a style="cursor:pointer" class="nav-link" (click)="onLogout()">Logout</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown" *ngIf="isAuthenticated">
+                        <a style="cursor:pointer" class="nav-link dropdown-toggle" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" appDropdown>
+                            Manage
+                        </a>
+                        <ul class="dropdown-menu" appDropdown>
+                            <li><a style="cursor:pointer" class="dropdown-item" (click)="onSaveData()">Save data</a>
+                            </li>
+                            <li><a style="cursor:pointer" type="button" class="dropdown-item"
+                                    (click)="onFetchData()">Fetch
+                                    Data</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </ul>
         </div>
     </div>
